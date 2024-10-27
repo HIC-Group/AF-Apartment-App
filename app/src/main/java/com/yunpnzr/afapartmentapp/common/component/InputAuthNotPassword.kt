@@ -35,7 +35,7 @@ fun InputAuthNotPassword(
     ) {
         Text(
             text = title,
-            style = MaterialTheme.typography.bodyMedium,
+            style = MaterialTheme.typography.titleSmall,
             modifier = Modifier.padding(top = padding.dp)
         )
 
