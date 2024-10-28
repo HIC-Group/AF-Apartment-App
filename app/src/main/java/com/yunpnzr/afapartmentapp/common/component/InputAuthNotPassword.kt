@@ -36,7 +36,7 @@ fun InputAuthNotPassword(
         Text(
             text = title,
             style = MaterialTheme.typography.titleSmall,
-            modifier = Modifier.padding(top = padding.dp)
+            //modifier = Modifier.padding(top = padding.dp)
         )
 
         BasicTextField(

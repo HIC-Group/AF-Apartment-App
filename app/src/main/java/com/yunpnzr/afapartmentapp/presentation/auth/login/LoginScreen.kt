@@ -16,11 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -81,7 +78,10 @@ fun AppBarLogin(
             )
     ) {
         Icon(
-            modifier = modifier,
+            modifier = modifier
+                .clickable {
+
+                },
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             tint = MaterialTheme.colorScheme.primary,
@@ -99,7 +99,10 @@ fun AppBarLogin(
         Spacer(modifier = Modifier.weight(1f))
 
         Icon(
-            modifier = modifier,
+            modifier = modifier
+                .clickable {
+
+                },
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             tint = MaterialTheme.colorScheme.primary,
@@ -148,7 +151,7 @@ fun LoginInputScreen(
             placeholder = "Enter your email",
             valueInput = email,
             onValueChange = { email = it },
-            padding = 16
+            padding = 48
         )
 
         InputAuthPassword(
@@ -156,7 +159,7 @@ fun LoginInputScreen(
             placeholder = "Enter your password",
             valueInput = password,
             onValueChange = { password = it },
-            padding = 8
+            padding = 16
         )
 
         Row(
@@ -174,7 +177,6 @@ fun LoginInputScreen(
                 modifier = Modifier
                     .padding(
                         top = 8.dp,
-                        bottom = 8.dp
                     )
                     .clickable { 
 
@@ -185,14 +187,14 @@ fun LoginInputScreen(
         Button(
             modifier = modifier
                 .fillMaxWidth()
-                .padding(top = 32.dp)
+                .padding(top = 48.dp)
                 .height(40.dp),
             shape = RoundedCornerShape(16.dp),
-            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary),
+            colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary),
             onClick = { /*TODO*/ }
         ) {
             Text(
-                text = "Login",
+                text = "Masuk",
                 style = MaterialTheme.typography.bodyMedium
             )
         }
