@@ -17,9 +17,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.yunpnzr.afapartmentapp.common.ui.theme.AppTheme
-import com.yunpnzr.afapartmentapp.presentation.auth.login.LoginInputScreen
-import com.yunpnzr.afapartmentapp.presentation.auth.login.LoginScreen
-import com.yunpnzr.afapartmentapp.presentation.auth.register.RegisterScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,11 +27,11 @@ class MainActivity : ComponentActivity() {
             AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     SetBarColors()
-                    /*Greeting(
+                    Greeting(
                         name = "android",
                         modifier = Modifier.padding(innerPadding)
-                    )*/
-                    LoginScreen(modifier = Modifier.padding(innerPadding) )
+                    )
+                    //LoginScreen(modifier = Modifier.padding(innerPadding) )
                     //RegisterScreen(modifier = Modifier.padding(innerPadding))
                 }
             }
