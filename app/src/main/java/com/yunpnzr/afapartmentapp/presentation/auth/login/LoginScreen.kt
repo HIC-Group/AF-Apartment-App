@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,7 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -33,48 +36,65 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.yunpnzr.afapartmentapp.R
 import com.yunpnzr.afapartmentapp.common.component.InputAuthNotPassword
 import com.yunpnzr.afapartmentapp.common.component.InputAuthPassword
+import com.yunpnzr.afapartmentapp.common.screen.AppScreen
 import com.yunpnzr.afapartmentapp.common.ui.theme.AppTheme
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ){
-    Column(
+    Box(
         modifier = modifier
             .fillMaxSize()
-            .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        Color(0xFF70A1D7),
-                        Color(0xFFF1F6FC)
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(LocalConfiguration.current.screenHeightDp.dp / 2)
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color(0xFF70A1D7),
+                            Color(0xFFF1F6FC)
+                        )
                     )
                 )
-            )
-    ) {
-        AppBarLogin(
-            modifier = modifier
-                .padding(vertical = 24.dp)
         )
-        LoginInputScreen()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+            AppBarLogin()
+            LoginInputScreen(modifier = Modifier, navController)
+        }
     }
 }
 
 @Composable
 fun AppBarLogin(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ){
     Row(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                horizontal = 24.dp
+                top = 32.dp,
+                bottom = 64.dp,
+                start = 24.dp,
+                end = 24.dp
             )
     ) {
         Icon(
@@ -112,7 +132,8 @@ fun AppBarLogin(
 
 @Composable
 fun LoginInputScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     Column(
         modifier = modifier
@@ -217,7 +238,11 @@ fun LoginInputScreen(
                 modifier = Modifier
                     .padding(start = 4.dp)
                     .clickable {
-
+                        navController.navigate(AppScreen.Register.route) {
+                            popUpTo(AppScreen.Login.route) {
+                                inclusive = true
+                            }
+                        }
                     }
             )
         }
@@ -278,7 +303,7 @@ fun LoginInputScreen(
 @Composable
 fun LoginScreenPreview(){
     AppTheme {
-        LoginScreen()
+        LoginScreen(navController = rememberNavController())
     }
 }
 
@@ -294,6 +319,6 @@ fun AppBarLoginPreview() {
 @Composable
 fun LoginInputScreenPreview(){
     AppTheme {
-        LoginInputScreen()
+        LoginInputScreen(navController = rememberNavController())
     }
 }

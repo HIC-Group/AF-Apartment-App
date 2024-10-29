@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.yunpnzr.afapartmentapp.common.screen.AppNavigation
 import com.yunpnzr.afapartmentapp.common.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,12 +28,14 @@ class MainActivity : ComponentActivity() {
             AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     SetBarColors()
-                    Greeting(
+                    /*Greeting(
                         name = "android",
                         modifier = Modifier.padding(innerPadding)
-                    )
+                    )*/
                     //LoginScreen(modifier = Modifier.padding(innerPadding) )
                     //RegisterScreen(modifier = Modifier.padding(innerPadding))
+
+                    AppNavigation(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
