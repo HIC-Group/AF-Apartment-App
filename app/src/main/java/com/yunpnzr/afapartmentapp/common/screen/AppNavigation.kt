@@ -6,6 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.yunpnzr.afapartmentapp.presentation.auth.forgetpassword.ForgetPasswordScreen
 import com.yunpnzr.afapartmentapp.presentation.auth.login.LoginScreen
 import com.yunpnzr.afapartmentapp.presentation.auth.register.RegisterScreen
 import com.yunpnzr.afapartmentapp.presentation.home.HomeScreen
@@ -25,7 +26,10 @@ fun AppNavigation(
             LoginScreen(modifier,navController)
         }
         composable(AppScreen.Register.route) {
-            RegisterScreen(modifier)
+            RegisterScreen(modifier, navController)
+        }
+        composable(AppScreen.ForgetPassword.route) {
+            ForgetPasswordScreen(modifier, navController)
         }
         /*composable(AppScreen.Home.route) {
             HomeScreen(navController)

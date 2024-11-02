@@ -1,5 +1,6 @@
 package com.yunpnzr.afapartmentapp.presentation.auth.login
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,12 +38,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.yunpnzr.afapartmentapp.R
 import com.yunpnzr.afapartmentapp.common.component.InputAuthNotPassword
@@ -62,7 +63,7 @@ fun LoginScreen(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(LocalConfiguration.current.screenHeightDp.dp / 2)
+                .height(LocalConfiguration.current.screenHeightDp.dp*3/4)
                 .background(
                     brush = Brush.horizontalGradient(
                         colors = listOf(
@@ -95,19 +96,23 @@ fun AppBarLogin(
                 bottom = 64.dp,
                 start = 24.dp,
                 end = 24.dp
-            )
+            ),
+        horizontalArrangement = Arrangement.Center
     ) {
-        Icon(
+
+        val activity = (LocalContext.current as? Activity)
+
+        /*Icon(
             modifier = modifier
                 .clickable {
-
+                    activity?.finish()
                 },
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             tint = MaterialTheme.colorScheme.primary,
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(1f))*/
 
         Text(
             modifier = modifier,
@@ -116,17 +121,17 @@ fun AppBarLogin(
             color = MaterialTheme.colorScheme.primary,
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        /*Spacer(modifier = Modifier.weight(1f))
 
         Icon(
             modifier = modifier
                 .clickable {
-
+                    activity?.finish()
                 },
-            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            painter = painterResource(R.drawable.ic_close),
             contentDescription = "Back",
             tint = MaterialTheme.colorScheme.primary,
-        )
+        )*/
     }
 }
 
@@ -199,8 +204,12 @@ fun LoginInputScreen(
                     .padding(
                         top = 8.dp,
                     )
-                    .clickable { 
-
+                    .clickable {
+                        navController.navigate(AppScreen.ForgetPassword.route){
+                            popUpTo(AppScreen.Login.route){
+                                inclusive = false
+                            }
+                        }
                     }
             )
         }
@@ -212,7 +221,9 @@ fun LoginInputScreen(
                 .height(40.dp),
             shape = RoundedCornerShape(16.dp),
             colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.secondary),
-            onClick = { /*TODO*/ }
+            onClick = {
+
+            }
         ) {
             Text(
                 text = "Masuk",
@@ -280,7 +291,9 @@ fun LoginInputScreen(
             colors = ButtonDefaults.outlinedButtonColors(
                 contentColor = MaterialTheme.colorScheme.onBackground
             ),
-            onClick = { /*TODO*/ }
+            onClick = {
+
+            }
         ){
             Image(
                 modifier = Modifier

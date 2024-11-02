@@ -1,9 +1,11 @@
 package com.yunpnzr.afapartmentapp.presentation.auth.register
 
+import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -36,43 +38,57 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.yunpnzr.afapartmentapp.R
 import com.yunpnzr.afapartmentapp.common.component.InputAuthNotPassword
 import com.yunpnzr.afapartmentapp.common.component.InputAuthPassword
 import com.yunpnzr.afapartmentapp.common.ui.theme.AppTheme
+import com.yunpnzr.afapartmentapp.presentation.auth.login.AppBarLogin
+import com.yunpnzr.afapartmentapp.presentation.auth.login.LoginInputScreen
 
 @Composable
 fun RegisterScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ){
-    Column(
+    Box(
         modifier = modifier
-            .verticalScroll(rememberScrollState())
-            .height(LocalConfiguration.current.screenHeightDp.dp/2)
-            .background(
-                brush = Brush.horizontalGradient(
-                    colors = listOf(
-                        Color(0xFF70A1D7),
-                        Color(0xFFF1F6FC)
+            .fillMaxSize()
+    ) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(LocalConfiguration.current.screenHeightDp.dp*3/4)
+                .background(
+                    brush = Brush.horizontalGradient(
+                        colors = listOf(
+                            Color(0xFF70A1D7),
+                            Color(0xFFF1F6FC)
+                        )
                     )
                 )
-            )
-    ) {
-        AppBarRegister(
-            modifier = modifier
-                .padding(vertical = 24.dp)
         )
-        RegisterInputScreen()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+        ) {
+            AppBarRegister()
+            RegisterInputScreen(modifier = Modifier, navController)
+        }
     }
 }
 
 @Composable
 fun RegisterInputScreen(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    navController: NavController
 ) {
     Column(
         modifier = modifier
@@ -82,6 +98,7 @@ fun RegisterInputScreen(
             .background(MaterialTheme.colorScheme.background)
             .padding(
                 top = 32.dp,
+                bottom = 32.dp,
                 start = 24.dp,
                 end = 24.dp
             )
@@ -228,20 +245,27 @@ fun AppBarRegister(
         modifier = modifier
             .fillMaxWidth()
             .padding(
-                horizontal = 24.dp
-            )
+                top = 32.dp,
+                bottom = 64.dp,
+                start = 24.dp,
+                end = 24.dp
+            ),
+        horizontalArrangement = Arrangement.Center
     ) {
-        Icon(
+
+        val activity = (LocalContext.current as? Activity)
+
+        /*Icon(
             modifier = modifier
                 .clickable {
-
+                    activity?.finish()
                 },
             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
             contentDescription = "Back",
             tint = MaterialTheme.colorScheme.primary,
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(1f))*/
 
         Text(
             modifier = modifier,
@@ -250,17 +274,17 @@ fun AppBarRegister(
             color = MaterialTheme.colorScheme.primary,
         )
 
-        Spacer(modifier = Modifier.weight(1f))
+        /*Spacer(modifier = Modifier.weight(1f))
 
         Icon(
             modifier = modifier
                 .clickable {
-
+                    activity?.finish()
                 },
-            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            painter = painterResource(R.drawable.ic_close),
             contentDescription = "Back",
             tint = MaterialTheme.colorScheme.primary,
-        )
+        )*/
     }
 }
 
@@ -268,6 +292,6 @@ fun AppBarRegister(
 @Preview(showBackground = true)
 fun RegisterScreenPreview(){
     AppTheme {
-        RegisterScreen()
+        RegisterScreen(navController = rememberNavController())
     }
 }
