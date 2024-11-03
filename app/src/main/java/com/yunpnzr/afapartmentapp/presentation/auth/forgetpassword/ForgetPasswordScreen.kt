@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
@@ -51,11 +52,12 @@ fun ForgetPasswordScreen(
     Box(
         modifier = modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
     ){
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(LocalConfiguration.current.screenHeightDp.dp*3/4)
+                .height(LocalConfiguration.current.screenHeightDp.dp*1/3)
                 .background(
                     brush = Brush.horizontalGradient(
                         colors = listOf(
@@ -64,7 +66,7 @@ fun ForgetPasswordScreen(
                         )
                     )
                 )
-        ){
+        )
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -73,7 +75,7 @@ fun ForgetPasswordScreen(
                 AppBarForgetPassword(modifier = Modifier, navController)
                 ForgetPasswordInputScreen(modifier = Modifier, navController)
             }
-        }
+
     }
 }
 
@@ -85,7 +87,7 @@ fun ForgetPasswordInputScreen(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .fillMaxHeight()
+            //.fillMaxHeight()
             .clip(RoundedCornerShape(topStart = 40.dp, topEnd = 40.dp))
             .background(MaterialTheme.colorScheme.background)
             .padding(
